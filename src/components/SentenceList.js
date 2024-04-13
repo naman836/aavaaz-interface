@@ -30,7 +30,7 @@ const SentenceList = () => {
 
     const fetchSentences = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/sentences'); // Updated endpoint URL
+            const response = await axios.get('https://aavaaz-interface.onrender.com/api/sentences'); // Updated endpoint URL
             if (response.data.length > 0) {
                 setSentences(response.data);
             }
@@ -44,7 +44,7 @@ const SentenceList = () => {
         if (!sentenceToUpdate) return;
 
         try {
-            await axios.put(`http://localhost:5000/api/sentences/${id}`, {
+            await axios.put(`https://aavaaz-interface.onrender.com/api/sentences/${id}`, {
                 
                 hindi: sentenceToUpdate.translation,
                 Corrected: "YES corrected yet",
@@ -66,7 +66,7 @@ const SentenceList = () => {
         if (!sentenceToUpdate) return;
 
         try {
-            await axios.put(`http://localhost:5000/api/sentences/${editId}`, {
+            await axios.put(`https://aavaaz-interface.onrender.com/api/sentences/${editId}`, {
                 hindi: newTranslation,
                 Corrected: "YES corrected yet",
                 isUpdated:true
