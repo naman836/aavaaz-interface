@@ -32,7 +32,7 @@ const SentenceList = () => {
             await axios.put(`https://aavaaz-interface.onrender.com/api/sentences/${id}`, {
                 hindi: sentenceToUpdate.translation,
                 Corrected: "YES corrected yet",
-                isUpdated: false
+                isUpdated: true
             });
             fetchSentences();
             alert("Awesome😊!");
@@ -69,7 +69,7 @@ const SentenceList = () => {
             {loading ? ( // Conditionally render loading indicator
                 <div>Loading...</div>
             ) : (
-                sentences.map((sentence) => (
+                sentences.filter((sentence) => sentence.IsUpdated == false).map((sentence) => (
                     <div key={sentence.id} className="sentence-container">
                         <p>Sentence: {sentence.text}</p>
                         <p>Translation: {sentence.translation}</p>
@@ -85,7 +85,10 @@ const SentenceList = () => {
                         ) : (
                             <div>
                                 <button onClick={() => handleCorrect(sentence.id)} style={{ color: 'green' }}>Correct</button>
-                                <button onClick={() => handleIncorrect(sentence.id)} style={{ color: 'red' }}>Incorrect</button>
+                                <button onClick={() => {
+                                    handleIncorrect(sentence.id)
+                                    setNewTranslation(sentence.translation)
+                                }} style={{ color: 'red' }}>Incorrect</button>
                             </div>
                         )}
                     </div>

@@ -58,6 +58,12 @@ button:hover {
   height: 100px;
  }
 
+ input{
+  height: 40px;
+  width: 400px;
+  
+ }
+
 
  @keyframes scaleAndFadeIn {
   0% {
