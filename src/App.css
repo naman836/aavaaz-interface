@@ -51,12 +51,14 @@ button:hover {
   background-color: #888;
   color: #fff;
 }
- img{
-
+img {
   margin-top: 10px;
-  width: 100px;
-  height: 100px;
- }
+  width: auto; 
+  max-width: 50%;
+  height: auto; 
+  max-height: 100px; 
+}
+
 
  input{
   height: 40px;
