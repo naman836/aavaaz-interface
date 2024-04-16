@@ -29,7 +29,7 @@ const SentenceList = ({ selectedLanguage }) => {
         if (!sentenceToUpdate) return;
 
         try {
-            await axios.put(`https://aavaaz-interface.onrender.com/api/sentences/${id}`, {
+            await axios.put(`https://aavaaz-interface.onrender.com/api/correctSentences/${id}`, {
                 [selectedLanguage.toLowerCase()]: sentenceToUpdate.translation,
                 Corrected: "YES corrected yet",
                 isUpdated: true

@@ -37,6 +37,24 @@ app.get("/api/sentences", async (req, res) => {
   }
 });
 
+app.put("/api/correctSentences/:id",async(req,res)=>{
+    const {id}=req.params;
+   try {
+    const updatedSentence = await Sentence.findOneAndUpdate(
+        { id: id },
+        {IsUpdated:true,Corrected:"YES corrected yet"},
+        { new: true }
+      );
+      if (!updatedSentence) {
+        return res.status(404).send("Sentence not found");
+      }
+  
+      res.send(updatedSentence);
+   } catch (error) {
+    res.status(500).send(error.message);
+   } 
+})
+
 // Update a sentence's translation and correctness
 app.put("/api/sentences/:id", async (req, res) => {
   const { id } = req.params;
