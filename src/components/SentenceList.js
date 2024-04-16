@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const SentenceList = () => {
+const SentenceList = ({ selectedLanguage }) => {
     const [sentences, setSentences] = useState([]);
     const [editId, setEditId] = useState(null);
     const [newTranslation, setNewTranslation] = useState("");
@@ -30,7 +30,7 @@ const SentenceList = () => {
 
         try {
             await axios.put(`https://aavaaz-interface.onrender.com/api/sentences/${id}`, {
-                hindi: sentenceToUpdate.translation,
+                [selectedLanguage.toLowerCase()]: sentenceToUpdate.translation,
                 Corrected: "YES corrected yet",
                 isUpdated: true
             });
@@ -51,7 +51,7 @@ const SentenceList = () => {
 
         try {
             await axios.put(`https://aavaaz-interface.onrender.com/api/sentences/${editId}`, {
-                hindi: newTranslation,
+                [selectedLanguage.toLowerCase()]: newTranslation,
                 Corrected: "YES corrected yet",
                 isUpdated: true
             });
@@ -69,10 +69,10 @@ const SentenceList = () => {
             {loading ? ( // Conditionally render loading indicator
                 <div>Loading...</div>
             ) : (
-                sentences.filter((sentence) => sentence.IsUpdated == false).map((sentence) => (
+                sentences.filter((sentence) => sentence.IsUpdated === false).map((sentence) => (
                     <div key={sentence.id} className="sentence-container">
                         <p>Sentence: {sentence.text}</p>
-                        <p>Translation: {sentence.translation}</p>
+                        <p>Translation: {sentence[selectedLanguage.toLowerCase()]}</p>
                         {editId === sentence.id ? (
                             <div>
                                 <input
@@ -87,7 +87,7 @@ const SentenceList = () => {
                                 <button onClick={() => handleCorrect(sentence.id)} style={{ color: 'green' }}>Correct</button>
                                 <button onClick={() => {
                                     handleIncorrect(sentence.id)
-                                    setNewTranslation(sentence.translation)
+                                    setNewTranslation(sentence[selectedLanguage.toLowerCase()])
                                 }} style={{ color: 'red' }}>Incorrect</button>
                             </div>
                         )}
