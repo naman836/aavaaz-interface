@@ -15,6 +15,7 @@ function App() {
         <img src={img} alt='logo'/>
         <h1>Welcome to Aavaaz!</h1>
         <select value={selectedLanguage} onChange={handleLanguageChange}>
+          {/* <option>Select Language</option> */}
           <option value="Spanish">Spanish</option>
           <option value="Tamil">Tamil</option>
           <option value="Hindi">Hindi</option>
